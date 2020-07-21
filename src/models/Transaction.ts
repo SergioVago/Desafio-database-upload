@@ -24,15 +24,15 @@ class Transaction {
   @Column('integer')
   value: number;
 
-  @ManyToOne(() => Category)
-  @JoinColumn({ name: 'category_id' })
-  category: Category;
-
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @ManyToOne(() => Category, category => category.transaction, { eager: true })
+  @JoinColumn({ name: 'category_id' })
+  category: Category;
 }
 
 export default Transaction;
