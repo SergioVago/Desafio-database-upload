@@ -55,11 +55,11 @@ transactionsRouter.post(
   upload.single('file'),
   async (request, response) => {
     const { file } = request;
-    const updateUserAvatar = new ImportTransactionsService();
+    const importTransactions = new ImportTransactionsService();
 
-    await updateUserAvatar.execute(file);
+    const transactions = await importTransactions.execute(file.path);
 
-    return response.sendStatus(200);
+    return response.json(transactions);
   },
 );
 
